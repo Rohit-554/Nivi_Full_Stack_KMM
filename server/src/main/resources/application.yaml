@@ -1,0 +1,20 @@
+# Add this file to `.gitignore` in real projects to avoid committing secrets.
+# Kept in version control here only for learning and demonstration purposes.
+# Created by Rohit - Jan 6 2026 01:55 AM IST
+ktor:
+  application:
+    modules:
+      - io.jadu.nivi.ApplicationKt.module
+  deployment:
+    port: 8080
+
+postgres:
+  url: "jdbc:postgresql://localhost:5433/nivi_db"
+  user: "myuser"
+  password: "mypassword"
+
+jwt:
+  domain: "https://nivi-app.com/"   # Who issued the token (Can be fake for local)
+  audience: "nivi-users"            # Who is the token for
+  realm: "nivi-backend"             # Name of your security zone
+  secret: "x7z9-random-secret-key-12345-change-me-in-prod" # <--- The Secret Key

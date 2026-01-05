@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # 1. The Database (PostgreSQL)
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: nivi_db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: nivi_db
+    ports:
+      - "5433:5432" # Maps container port to your laptop port
+    volumes:
+      - nivi_data_v2:/var/lib/postgresql/data # Saves data even if you restart Docker
+
+  # 2. The Dashboard (pgAdmin) - To see your data visually
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: nivi_admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres_db
+
+# Define the storage volume
+volumes:
+  nivi_data_v2:
