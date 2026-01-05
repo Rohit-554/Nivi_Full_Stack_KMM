@@ -3,8 +3,7 @@ package io.jadu.nivi.data.db.local
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.date
 
-enum class TransactionType { INCOME, EXPENSE }
-enum class Necessity { NEED, WANT, INVESTMENT }
+
 
 object TransactionTable : Table("transactions") {
     val id = integer("id").autoIncrement()

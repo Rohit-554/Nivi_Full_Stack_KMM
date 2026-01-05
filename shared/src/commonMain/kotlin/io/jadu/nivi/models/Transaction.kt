@@ -1,8 +1,9 @@
-package io.jadu.nivi.data.model
+package io.jadu.nivi.models
 
-import io.jadu.nivi.data.db.local.Necessity
-import io.jadu.nivi.data.db.local.TransactionType
 import kotlinx.serialization.Serializable
+
+enum class TransactionType { INCOME, EXPENSE }
+enum class Necessity { NEED, WANT, INVESTMENT }
 
 @Serializable
 data class Transaction (

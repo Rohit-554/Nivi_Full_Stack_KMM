@@ -1,4 +1,4 @@
-package io.jadu.nivi.utils
+package io.jadu.nivi.models
 
 import kotlinx.serialization.Serializable
 

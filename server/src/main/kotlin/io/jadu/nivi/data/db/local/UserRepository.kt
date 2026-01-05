@@ -1,8 +1,8 @@
 package io.jadu.nivi.data.db.local
 
-import io.jadu.nivi.data.model.RegisterRequest
-import io.jadu.nivi.data.model.User
 import io.jadu.nivi.dbQuery
+import io.jadu.nivi.models.RegisterRequest
+import io.jadu.nivi.models.User
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll

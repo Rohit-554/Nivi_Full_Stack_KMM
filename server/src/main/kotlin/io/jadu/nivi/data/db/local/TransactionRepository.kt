@@ -1,14 +1,16 @@
 package io.jadu.nivi.data.db.local
 
-import io.jadu.nivi.data.model.Transaction
 import io.jadu.nivi.dbQuery
+import io.jadu.nivi.models.Necessity
+import io.jadu.nivi.models.Transaction
+import io.jadu.nivi.models.TransactionType
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import java.time.LocalDate
 
 class TransactionRepository {
-    private fun rowToTransaction(row: ResultRow)  = Transaction (
+    private fun rowToTransaction(row: ResultRow)  = Transaction(
         id = row[TransactionTable.id],
         userId = row[TransactionTable.userId],
         title = row[TransactionTable.title],
