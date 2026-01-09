@@ -6,6 +6,7 @@ import io.jadu.nivi.models.AuthResponse
 import io.jadu.nivi.models.LoginRequest
 import io.jadu.nivi.models.NetworkResult
 import io.jadu.nivi.models.RegisterRequest
+import io.jadu.nivi.utils.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -28,21 +29,6 @@ class AuthService (
             client.post("/auth/register") {
                 setBody(request)
             }.body<ApiResponse<AuthResponse>>()
-        }
-    }
-
-    private suspend fun <T> safeApiCall(apiCall: suspend () -> ApiResponse<T>): NetworkResult<T> {
-        return try {
-            val response = apiCall()
-
-            if (response.success && response.data != null) {
-                NetworkResult.Success(response.data)
-            } else {
-                NetworkResult.Error(response.message ?: "Unknown Server Error")
-            }
-        } catch (e: Exception) {
-            // Handles No Internet, Timeout, Server Down (500), etc.
-            NetworkResult.Error(e.message ?: "Network Request Failed")
         }
     }
 }

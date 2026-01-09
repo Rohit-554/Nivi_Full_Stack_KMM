@@ -30,6 +30,15 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
+        androidUnitTest.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
+        iosTest.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+        jvmTest.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
     }
 }
 

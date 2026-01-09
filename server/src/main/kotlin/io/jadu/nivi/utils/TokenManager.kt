@@ -2,9 +2,9 @@ package io.jadu.nivi.utils
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import io.jadu.nivi.data.model.User
-import io.ktor.server.config.*
-import java.util.*
+import io.jadu.nivi.models.User
+import io.ktor.server.config.ApplicationConfig
+import java.util.Date
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.days
 import kotlin.time.ExperimentalTime
