@@ -36,4 +36,6 @@ dependencies {
     implementation(libs.ktor.server.status.pages)
     implementation(libs.ktor.server.call.logging)
     implementation(libs.ktor.server.config.yaml)
+    implementation("com.github.haifengl:smile-kotlin:4.4.2") // 17 -21
+    implementation("com.github.haifengl:smile-nlp:4.4.2")
 }
