@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
@@ -38,8 +36,8 @@ android {
 dependencies {
 
     implementation(projects.composeApp)
-    implementation("androidx.compose.material3:material3:1.4.0")
-    implementation(compose.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.compose.uiToolingPreview)
     implementation(libs.androidx.activity.compose)
 
     implementation(libs.androidx.core.ktx)
