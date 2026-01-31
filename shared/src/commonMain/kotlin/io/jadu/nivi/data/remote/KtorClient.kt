@@ -1,10 +1,13 @@
 package io.jadu.nivi.data.remote
 
 import io.jadu.nivi.utils.Constants
-import io.ktor.client.*
-import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.*
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
@@ -30,7 +33,7 @@ object KtorClient {
         }
 
         defaultRequest {
-            url(Constants.BASE_URL)
+            url(Constants.IOS_BASE_URL)
             contentType(ContentType.Application.Json)
         }
     }

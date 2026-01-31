@@ -6,7 +6,6 @@ import io.jadu.nivi.models.Necessity
 import io.jadu.nivi.models.Transaction
 import io.jadu.nivi.models.TransactionResponse
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.Application
 import io.ktor.server.application.log
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.jwt.JWTPrincipal
@@ -34,7 +33,7 @@ fun Route.transactionalRoute(repository: TransactionRepository) {
                 val userId = principal!!.payload.getClaim("userId").asInt()
 
                 val list = repository.getAllTransactions(userId)
-                val insights = getInsights(list, application)
+                val insights = getInsights(list)
 
                 val response = TransactionResponse(
                     transactions = list,
@@ -64,7 +63,7 @@ fun Route.transactionalRoute(repository: TransactionRepository) {
 }
 
 
-fun getInsights(list: List<Transaction>, application: Application) : Map<String, Any> {
+fun getInsights(list: List<Transaction>) : Map<String, Any> {
 
     val df = DataFrame.of(Transaction::class.java, list)
     val amounts: DoubleArray = df.column("amount").toDoubleArray()

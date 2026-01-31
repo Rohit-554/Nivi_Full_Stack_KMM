@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -40,6 +39,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(projects.shared)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation("io.ktor:ktor-client-cio:3.4.0")
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
