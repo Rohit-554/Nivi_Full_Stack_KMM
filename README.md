@@ -140,4 +140,22 @@ in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and r
 
 ---
 
+## Contributors
+
+Thanks to the following people who have contributed to this project:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/Rohit-554">
+        <img src="https://github.com/Rohit-554.png" width="100px;" alt="Rohit-554"/>
+        <br />
+        <sub><b>Jadu (Rohit-554)</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+---
+
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
