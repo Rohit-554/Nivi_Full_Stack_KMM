@@ -30,6 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import io.jadu.nivi.presentation.theme.ElementsColors
+import io.jadu.nivi.presentation.theme.bodyLarge
+import io.jadu.nivi.presentation.theme.bodyNormal
+import io.jadu.nivi.presentation.theme.bodySmall
 import io.jadu.nivi.presentation.viewModel.AuthUiState
 import io.jadu.nivi.presentation.viewModel.AuthViewModel
 import org.koin.compose.koinInject
@@ -75,7 +79,7 @@ fun LoginScreen(
 
             Text(
                 text = if (isLoginMode) "Welcome Back" else "Create an account",
-                style = MaterialTheme.typography.headlineMedium
+                style = bodyLarge()
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -191,7 +195,10 @@ fun LoginScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text(if (isLoginMode) "Login" else "Sign up")
+                    Text(
+                        if (isLoginMode) "Login" else "Sign up",
+                        style = bodySmall()
+                    )
                 }
             }
 
@@ -201,12 +208,13 @@ fun LoginScreen(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = if (isLoginMode) "Don't have an account? " else "Already have an account? ",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = bodyNormal()
                 )
 
                 Text(
                     text = if (isLoginMode) "Sign up" else "Log in",
-                    color = MaterialTheme.colorScheme.primary,
+                    style = bodyLarge(),
+                    color = ElementsColors.LinkColor.color,
                     modifier = Modifier.clickable {
                         // simple if/else route toggle — flip the mode
                         isLoginMode = !isLoginMode
