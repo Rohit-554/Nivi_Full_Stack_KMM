@@ -1,16 +1,18 @@
 package io.jadu.nivi.routing
 
 import io.jadu.nivi.data.db.local.UserRepository
-import io.jadu.nivi.data.model.AuthResponse
-import io.jadu.nivi.data.model.LoginRequest
-import io.jadu.nivi.data.model.RegisterRequest
+import io.jadu.nivi.models.ApiResponse
+import io.jadu.nivi.models.AuthResponse
+import io.jadu.nivi.models.LoginRequest
+import io.jadu.nivi.models.RegisterRequest
 import io.jadu.nivi.route.AppRoutes
-import io.jadu.nivi.utils.ApiResponse
 import io.jadu.nivi.utils.TokenManager
-import io.ktor.http.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.post
+import io.ktor.server.routing.route
 import org.mindrot.jbcrypt.BCrypt
 
 fun Route.authRoute(userRepository: UserRepository, tokenManager: TokenManager) {
@@ -34,7 +36,12 @@ fun Route.authRoute(userRepository: UserRepository, tokenManager: TokenManager) 
 
                 val token = tokenManager.generateToken(newUser)
 
-                call.respond(HttpStatusCode.Created, ApiResponse.success(AuthResponse(token, newUser.name)))
+                call.respond(HttpStatusCode.Created, ApiResponse.success(
+                    AuthResponse(
+                        token,
+                        newUser.name
+                    )
+                ))
 
             }catch(e: Exception) {
                 call.respond(HttpStatusCode.BadRequest, ApiResponse.error<Nothing>("Invalid data: ${e.message}"))
