@@ -9,8 +9,10 @@ androidx-core = "1.17.0"
 androidx-espresso = "3.7.0"
 androidx-lifecycle = "2.9.6"
 androidx-testExt = "1.3.0"
+coilNetworkOkhttp = "3.3.0"
 componentsResources = "1.10.0"
 composeMultiplatform = "1.10.0"
+composeShimmer = "1.3.3"
 foundation = "1.10.0"
 hikaricp = "7.0.2"
 jbcrypt = "0.4"
@@ -21,17 +23,22 @@ ktor = "3.4.0"
 logback = "1.5.27"
 exposed = "1.0.0"
 h2 = "2.4.240"
-material3 = "1.9.0"
+material3 = "1.11.0-alpha02"
 material3Version = "1.4.0"
 postgres = "42.7.9"
 koin-core = "4.1.1"
 koin-compose = "4.1.1"
 material = "1.13.0"
+riveCmp = "0.3.1"
 runtime = "1.10.0"
+materialIconsExtended = "1.7.3"
+coil3 = "3.2.0"
 
 [libraries]
 androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "componentsResources" }
+compose-shimmer = { module = "com.valentinilk.shimmer:compose-shimmer", version.ref = "composeShimmer" }
 foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "foundation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
@@ -76,8 +83,12 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-com
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 compose-uiToolingPreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeMultiplatform" }
 compose-uiTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeMultiplatform" }
+rive-cmp = { module = "dev.muazkadan:rive-cmp", version.ref = "riveCmp" }
 runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "runtime" }
 ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
+material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
 
 [plugins]
 androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
