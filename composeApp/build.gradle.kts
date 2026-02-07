@@ -58,6 +58,12 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.ktor.client.cio)
+            implementation(libs.material.icons.extended)
+            //implementation(libs.coil.network.okhttp)
+            implementation(libs.compose.shimmer)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor)
+            implementation(libs.rive.cmp)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
