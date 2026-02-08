@@ -18,12 +18,12 @@ class OnboardingViewModel : ViewModel() {
         OnboardingPage(
             title = "Smart Budgeting",
             description = "Set budgets and get intelligent recommendations to help you save more and spend wisely.",
-            riveAnimationUrl = "files/ch.riv"
+            riveAnimationUrl = "files/moving_shape.riv"
         ),
         OnboardingPage(
             title = "Financial Insights",
             description = "Get personalized financial insights and predictions powered by AI to achieve your goals.",
-            riveAnimationUrl = "files/tree.riv"
+            riveAnimationUrl = "files/shapes_2.riv"
         )
     )
 
