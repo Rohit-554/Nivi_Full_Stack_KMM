@@ -1,4 +1,4 @@
-package io.jadu.nivi.presentation.lottie
+package io.jadu.nivi.presentation.components.lottie
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
