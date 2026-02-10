@@ -1,4 +1,4 @@
-package io.jadu.nivi.presentation.screens
+package io.jadu.nivi.presentation.screens.onBoardingScreens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,7 +42,10 @@ import org.koin.compose.koinInject
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun LoginScreen(
-    viewModel: AuthViewModel = koinInject()
+    modifier: Modifier = Modifier,
+    viewModel: AuthViewModel = koinInject(),
+    onLogin: () -> Unit,
+    onRegisterClick: () -> Unit,
 ) {
 
     // Collect the StateFlow as Compose State
