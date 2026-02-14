@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -87,7 +88,9 @@ fun ButtonUI(
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .alpha(if(enabled) 1f else 0.2f )
             ) {
                 if (leadingIcon != null) {
                     Icon(
@@ -124,7 +127,7 @@ fun NiviButton(text:String, onClick: () -> Unit, modifier: Modifier = Modifier, 
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = Spacing.s16)
-            .height(Spacing.s12),
+            .height(Spacing.s48),
         onClick = onClick,
         text = text,
         enabled = isEnabled,
@@ -137,6 +140,7 @@ fun ButtonUIPreview() {
     ButtonUI(
         modifier = Modifier.fillMaxWidth(),
         onClick = {},
+        enabled = false,
         text = "Click Me",
     )
 }

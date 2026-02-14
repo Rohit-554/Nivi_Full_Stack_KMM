@@ -30,6 +30,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import io.jadu.nivi.presentation.theme.MajorColors
 import io.jadu.nivi.presentation.theme.Spacing
 import io.jadu.nivi.presentation.theme.bodyLarge
 import io.jadu.nivi.presentation.theme.bodyNormal
@@ -51,14 +52,14 @@ fun InputTextField(
     singleLine: Boolean = true,
     textStyle: TextStyle =  bodyLarge().copy(
         fontWeight = FontWeight.SemiBold,
-        color = MaterialTheme.colorScheme.secondary,
+        color = MajorColors.White.color,
         fontSize = 20.sp
     ),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     enabled: Boolean = true,
     containerColor: Color = MaterialTheme.colorScheme.surface,
-    textColor: Color = MaterialTheme.colorScheme.secondary,
+    textColor: Color = MajorColors.White.color,
     focusedBorderColor: Color = MaterialTheme.colorScheme.primary,
     unfocusedBorderColor: Color = MaterialTheme.colorScheme.outline,
     errorColor: Color = MaterialTheme.colorScheme.error
@@ -83,7 +84,7 @@ fun InputTextField(
             Text(
                 text = placeholder,
                 style = bodyNormal().copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
+                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
                     fontSize = 16.sp
                 )
             )
@@ -93,7 +94,7 @@ fun InputTextField(
                 Icon(
                     imageVector = it,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.secondary
+                    tint = MaterialTheme.colorScheme.outline
                 )
             }
         },
