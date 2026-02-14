@@ -10,6 +10,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import io.jadu.nivi.presentation.navigation.AppRoute
+import io.jadu.nivi.presentation.screens.auth.LoginScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
@@ -49,10 +50,7 @@ fun OnBoardingNavigation(
                 )
             }
             entry<AppRoute.OnBoarding.Login> {
-                LoginScreen(
-                    onLogin = {},
-                    onRegisterClick = {}
-                )
+                LoginScreen()
             }
 
             entry<AppRoute.OnBoarding.Signup> {
