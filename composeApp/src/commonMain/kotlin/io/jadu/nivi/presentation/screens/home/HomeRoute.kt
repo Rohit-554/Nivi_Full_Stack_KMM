@@ -39,12 +39,10 @@ fun HomeNavigation(
         ),
         entryProvider = entryProvider {
             entry<AppRoute.Home.Dashboard> {
-                //TODO:: IMPLEMENT THE COMPOSABLE
-                homeBackStack.add(AppRoute.Home.Settings)
+                DashBoard()
             }
             entry<AppRoute.Home.Settings> {
                 //TODO:: IMPLEMENT THE COMPOSABLE
-                homeBackStack.add(AppRoute.Home.Settings)
             }
             entry<AppRoute.Home.Profile> {
                 //TODO:: IMPLEMENT THE COMPOSABLE

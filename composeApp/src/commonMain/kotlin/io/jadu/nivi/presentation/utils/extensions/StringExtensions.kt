@@ -61,3 +61,7 @@ fun createBoldAnnotatedString(
         }
     }
 }
+
+fun String?.orEmpty(): String {
+    return if (this.isNullOrBlank()) "" else this
+}

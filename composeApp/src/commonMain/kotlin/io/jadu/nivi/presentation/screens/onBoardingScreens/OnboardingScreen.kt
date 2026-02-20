@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,6 +49,7 @@ import io.jadu.nivi.presentation.theme.Spacing
 import io.jadu.nivi.presentation.theme.bodyLarge
 import io.jadu.nivi.presentation.theme.h1TextStyle
 import io.jadu.nivi.presentation.utils.VSpacer
+import io.jadu.nivi.presentation.utils.extensions.bounceClickable
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -84,7 +86,12 @@ fun OnboardingScreen(
 
         if (!uiState.isLastPage) {
             NormalOnBoardingScreens(
-                onClick = {
+                onSkipClick = {
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(uiState.totalPages - 1)
+                    }
+                },
+                onNextClick = {
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(uiState.currentPage + 1)
                     }
@@ -150,28 +157,41 @@ private fun OnboardingPageContent(
 
 @Composable
 private fun BoxScope.NormalOnBoardingScreens(
-    onClick: () -> Unit
+    onSkipClick: () -> Unit,
+    onNextClick: () -> Unit
 ) {
-    GlassContainer(
-        modifier = Modifier
-            .padding(Spacing.s16)
-            .align(Alignment.BottomEnd),
-        shape = CircleShape
+    Row(
+        modifier = Modifier.fillMaxWidth().align(Alignment.BottomEnd),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        IconButton(
+        Text(
             modifier = Modifier
-                .align(Alignment.BottomEnd),
-            content = {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(Spacing.s36)
-                )
-            },
-            onClick = onClick
+                .padding(start = Spacing.s16)
+                .bounceClickable { onSkipClick() },
+            text = "Skip",
+            style = bodyLarge()
         )
+        GlassContainer(
+            modifier = Modifier
+                .padding(Spacing.s16),
+            shape = CircleShape
+        ) {
+            IconButton(
+                modifier = Modifier,
+                content = {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(Spacing.s36)
+                    )
+                },
+                onClick = onNextClick
+            )
+        }
     }
+
 }
 
 @Composable
