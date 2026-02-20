@@ -11,13 +11,14 @@ import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import io.jadu.nivi.presentation.navigation.AppRoute
 import io.jadu.nivi.presentation.screens.auth.LoginScreen
+import io.jadu.nivi.presentation.screens.auth.SignUpScreen
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
 @Composable
 fun OnBoardingNavigation(
+    modifier: Modifier = Modifier,
     onLogin:() -> Unit,
-    modifier: Modifier = Modifier
 ) {
     val onBoardingBackStack = rememberNavBackStack(
         configuration = SavedStateConfiguration {
@@ -50,11 +51,25 @@ fun OnBoardingNavigation(
                 )
             }
             entry<AppRoute.OnBoarding.Login> {
-                LoginScreen()
+                LoginScreen(
+                    onLoginSuccess = {
+                        onLogin()
+                    },
+                    onSignUpClick = {
+                        onBoardingBackStack.add(AppRoute.OnBoarding.Signup)
+                    }
+                )
             }
 
             entry<AppRoute.OnBoarding.Signup> {
-                // TODO:: IMPLEMENT REGISTER SCREEN
+                SignUpScreen(
+                    onLoginClick = {
+                        onBoardingBackStack.remove(AppRoute.OnBoarding.Signup)
+                    },
+                    onSignUpSuccess = {
+                        onLogin()
+                    }
+                )
             }
         }
     )

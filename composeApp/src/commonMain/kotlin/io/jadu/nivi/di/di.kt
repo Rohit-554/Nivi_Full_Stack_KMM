@@ -6,7 +6,8 @@ import io.jadu.nivi.data.repository.AuthRepositoryImpl
 import io.jadu.nivi.domain.repository.AuthRepository
 import io.jadu.nivi.domain.useCase.LoginUseCase
 import io.jadu.nivi.domain.useCase.SignupUseCase
-import io.jadu.nivi.presentation.viewModel.AuthViewModel
+import io.jadu.nivi.presentation.viewmodel.LoginViewModel
+import io.jadu.nivi.presentation.viewmodel.SignupViewModel
 import io.jadu.nivi.service.AuthService
 import org.koin.core.Koin
 import org.koin.core.KoinApplication
@@ -31,7 +32,8 @@ val appModule = module {
     single<AuthRepository> { AuthRepositoryImpl(get()) }
     factory { LoginUseCase(get()) }
     factory { SignupUseCase(get()) }
-    single { AuthViewModel(get(), get()) }
+    single { LoginViewModel(get()) }
+    single { SignupViewModel(get()) }
 }
 
 

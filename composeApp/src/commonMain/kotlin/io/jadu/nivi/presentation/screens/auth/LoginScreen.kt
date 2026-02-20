@@ -20,10 +20,11 @@ import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -46,17 +47,36 @@ import io.jadu.nivi.presentation.utils.VSpacer
 import io.jadu.nivi.presentation.utils.extensions.bounceClickable
 import io.jadu.nivi.presentation.utils.extensions.createBoldAnnotatedString
 import io.jadu.nivi.presentation.utils.extensions.noRippleClickable
+import io.jadu.nivi.presentation.utils.extensions.orEmpty
+import io.jadu.nivi.presentation.viewmodel.LoginEvent
+import io.jadu.nivi.presentation.viewmodel.LoginViewModel
 import nivi.composeapp.generated.resources.Res
 import nivi.composeapp.generated.resources.account_login_protection
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    loginViewModel: LoginViewModel = koinInject(),
+    onSignUpClick: () -> Unit,
+    onLoginSuccess: () -> Unit,
+) {
     val focusManager = LocalFocusManager.current
     val isLoading = remember { mutableStateOf(false) }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val uiState by loginViewModel.uiState.collectAsState()
+
+
+
+    LaunchedEffect(Unit) {
+        loginViewModel.event.collect { event->
+            when(event) {
+                is LoginEvent.Error -> showSnackBar(message = event.message, positiveMessage = false)
+                is LoginEvent.Success -> onLoginSuccess()
+            }
+        }
+    }
+
     val signUpText = createBoldAnnotatedString(
         fullString = "Don't have an account? Sign Up",
         boldStrings = listOf("Sign Up"),
@@ -113,22 +133,18 @@ fun LoginScreen() {
                 VSpacer(Spacing.s8)
                 InputTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = email,
+                    value = uiState.loginRequest?.email.orEmpty(),
                     label = "Email",
-                    onValueChange = {
-                        email = it
-                    },
+                    onValueChange = loginViewModel::updateEmail,
                     placeholder = "Enter your email",
                     leadingIcon = Icons.Default.Person
                 )
                 VSpacer(Spacing.s2)
                 InputTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    value = password,
+                    value = uiState.loginRequest?.password.orEmpty(),
                     label = "Password",
-                    onValueChange = {
-                        password = it
-                    },
+                    onValueChange = loginViewModel::updatePassword,
                     placeholder = "Enter your password",
                     isPassword = true,
                     leadingIcon = Icons.Default.Lock
@@ -152,8 +168,8 @@ fun LoginScreen() {
                 NiviButton(
                     modifier = Modifier,
                     text = "Login",
-                    isEnabled = !email.isBlank() && !password.isBlank(),
-                    onClick = {  }
+                    isEnabled = uiState.isEnabled,
+                    onClick = { loginViewModel.login() }
                 )
                 VSpacer(Spacing.s16)
                 OrDivider(
@@ -181,7 +197,7 @@ fun LoginScreen() {
                     modifier = Modifier
                         .padding(Spacing.s8)
                         .noRippleClickable {
-
+                            onSignUpClick()
                         }
                 )
             }
