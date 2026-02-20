@@ -4,12 +4,14 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.jadu.nivi.data.db.local.TransactionTable
 import io.jadu.nivi.data.db.local.UserTable
-import io.ktor.server.application.*
+import io.ktor.server.application.Application
+import io.ktor.server.application.log
 import kotlinx.coroutines.Dispatchers
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
-import org.jetbrains.exposed.sql.transactions.transaction
+import kotlinx.coroutines.withContext
+import org.jetbrains.exposed.v1.jdbc.Database
+import org.jetbrains.exposed.v1.jdbc.SchemaUtils
+import org.jetbrains.exposed.v1.jdbc.transactions.suspendTransaction
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 fun Application.configureDatabases() {
     // 1. Configure db
@@ -38,5 +40,9 @@ fun Application.configureDatabases() {
     log.info("✅ Database connected successfully to Docker Postgres!")
 }
 
-suspend fun <T> dbQuery(block : suspend () -> T) : T =
-    newSuspendedTransaction(Dispatchers.IO) { block() }
+suspend fun <T> dbQuery(block: suspend () -> T): T =
+    withContext(Dispatchers.IO) {
+        suspendTransaction {
+            block()
+        }
+    }

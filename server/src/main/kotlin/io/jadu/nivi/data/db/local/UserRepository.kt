@@ -3,9 +3,10 @@ package io.jadu.nivi.data.db.local
 import io.jadu.nivi.dbQuery
 import io.jadu.nivi.models.RegisterRequest
 import io.jadu.nivi.models.User
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.v1.core.ResultRow
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.insert
+import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.mindrot.jbcrypt.BCrypt
 
 class UserRepository {

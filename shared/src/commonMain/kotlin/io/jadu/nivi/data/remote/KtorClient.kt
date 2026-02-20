@@ -33,7 +33,7 @@ object KtorClient {
         }
 
         defaultRequest {
-            url(Constants.IOS_BASE_URL)
+            url(Constants.BASE_URL)
             contentType(ContentType.Application.Json)
         }
     }

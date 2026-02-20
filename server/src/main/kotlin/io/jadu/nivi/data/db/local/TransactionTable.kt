@@ -1,8 +1,7 @@
 package io.jadu.nivi.data.db.local
 
-import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.javatime.date
-
+import org.jetbrains.exposed.v1.core.Table
+import org.jetbrains.exposed.v1.javatime.date
 
 
 object TransactionTable : Table("transactions") {
