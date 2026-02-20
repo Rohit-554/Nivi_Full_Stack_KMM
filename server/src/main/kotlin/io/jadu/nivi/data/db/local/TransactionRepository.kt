@@ -4,9 +4,10 @@ import io.jadu.nivi.dbQuery
 import io.jadu.nivi.models.Necessity
 import io.jadu.nivi.models.Transaction
 import io.jadu.nivi.models.TransactionType
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.v1.core.ResultRow
+import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.insert
+import org.jetbrains.exposed.v1.jdbc.selectAll
 import java.time.LocalDate
 
 class TransactionRepository {
