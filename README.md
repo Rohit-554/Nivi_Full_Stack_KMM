@@ -1,5 +1,5 @@
 # Project NIVI
-This is a Kotlin Multiplatform project targeting Android, iOS, Server.
+A financial intelligence application fully developed using CMP & KTOR, designed to bridge the gap between daily expenses and future wealth. Unlike simple trackers, Nivi uses a "Desi" storytelling approach to teach users about investable surplus and compounding.
 
 ### Demo 
 <img width="200" height="450" alt="image" src="https://github.com/user-attachments/assets/54e1af4b-6f95-448b-897a-cb42ce694850" />
