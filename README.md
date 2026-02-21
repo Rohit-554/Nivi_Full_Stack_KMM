@@ -1,35 +1,13 @@
+# Project NIVI
 This is a Kotlin Multiplatform project targeting Android, iOS, Server.
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+### Demo 
+<img width="200" height="450" alt="image" src="https://github.com/user-attachments/assets/54e1af4b-6f95-448b-897a-cb42ce694850" />
+<img width="200" height="450" alt="image" src="https://github.com/user-attachments/assets/1cc8fc78-b857-45e9-94eb-9ab34054f00f" />
+<img width="200" height="450" alt="image" src="https://github.com/user-attachments/assets/dab51c7b-4cca-4f46-91a4-cd4b0a7274fc" />
+<img width="200" height="450" alt="Screenshot_20260220_231108" src="https://github.com/user-attachments/assets/1ec1f529-d69e-4e1d-81b9-249c31b7a8ba" />
+<img width="200" height="450" alt="Screenshot_20260220_231052" src="https://github.com/user-attachments/assets/6a5e30e2-e057-4a5a-948a-5857416855b8" />
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-* [/server](./server/src/main/kotlin) is for the Ktor server application.
-
-* [/shared](./shared/src) is for the code that will be shared between all targets in the project.
-  The most important subfolder is [commonMain](./shared/src/commonMain/kotlin). If preferred, you
-  can add code to the platform-specific folders here too.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
 
 ### Build and Run Server
 
