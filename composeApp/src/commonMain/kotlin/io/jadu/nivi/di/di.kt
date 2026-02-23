@@ -1,11 +1,13 @@
 package io.jadu.nivi.di
 
 
-
 import io.jadu.nivi.data.repository.AuthRepositoryImpl
+import io.jadu.nivi.domain.manager.AuthManager
 import io.jadu.nivi.domain.repository.AuthRepository
 import io.jadu.nivi.domain.useCase.LoginUseCase
+import io.jadu.nivi.domain.useCase.LogoutUseCase
 import io.jadu.nivi.domain.useCase.SignupUseCase
+import io.jadu.nivi.presentation.screens.OnboardingViewModel
 import io.jadu.nivi.presentation.viewmodel.LoginViewModel
 import io.jadu.nivi.presentation.viewmodel.SignupViewModel
 import io.jadu.nivi.service.AuthService
@@ -30,10 +32,13 @@ fun initKoin(config: (KoinApplication) -> Unit = {}) {
 val appModule = module {
     single { AuthService() }
     single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single { AuthManager(get()) }
+    single { OnboardingViewModel(get(), get()) }
     factory { LoginUseCase(get()) }
     factory { SignupUseCase(get()) }
-    single { LoginViewModel(get()) }
-    single { SignupViewModel(get()) }
+    factory { LogoutUseCase(get()) }
+    single { LoginViewModel(get(), get()) }
+    single { SignupViewModel(get(), get()) }
 }
 
 

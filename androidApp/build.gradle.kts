@@ -47,4 +47,7 @@ dependencies {
     androidTestImplementation(libs.androidx.testExt.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.startup:startup-runtime:1.2.0")
+    implementation("androidx.core:core-splashscreen:1.2.0")
+    implementation("io.insert-koin:koin-android:4.1.1")
+
 }

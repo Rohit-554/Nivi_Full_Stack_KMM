@@ -34,6 +34,7 @@ runtime = "1.10.0"
 materialIconsExtended = "1.7.3"
 coil3 = "3.2.0"
 compottie = "2.0.2"
+datastore = "1.2.0"
 multiplatform-nav3-ui = "1.0.0-alpha06"
 
 [libraries]
@@ -96,6 +97,8 @@ compottie-dot = { module = "io.github.alexzhirkevich:compottie-dot", version.ref
 jetbrains-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "multiplatform-nav3-ui" }
 jetbrains-lifecycle-viewmodel-nav3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidx-lifecycle" }
 jetbrains-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle"}
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 [plugins]
 androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }

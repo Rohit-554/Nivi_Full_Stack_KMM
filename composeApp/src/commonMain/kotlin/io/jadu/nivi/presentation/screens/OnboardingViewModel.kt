@@ -1,14 +1,24 @@
 package io.jadu.nivi.presentation.screens
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.jadu.nivi.domain.manager.AuthManager
+import io.jadu.nivi.presentation.navigation.AppRoute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 
-class OnboardingViewModel : ViewModel() {
+class OnboardingViewModel(
+    val prefs: DataStore<Preferences>,
+    val authManager: AuthManager
+) : ViewModel() {
     private val onboardingPages = listOf(
         OnboardingPage(
             title = "Track Your Expenses",
@@ -48,6 +58,23 @@ class OnboardingViewModel : ViewModel() {
                 onFinish()
             }
         }
+    }
+
+    private val isNewUserKey = booleanPreferencesKey("is_new_user")
+
+    suspend fun getCurrentRoute(): AppRoute {
+        val isLoggedIn = authManager.isLoggedIn()
+        if (isLoggedIn) {
+            return AppRoute.Home
+        }
+
+        val isNewUser = prefs.data.first()[isNewUserKey] ?: true
+        return if (isNewUser) AppRoute.OnBoarding.OnBoarding1 else AppRoute.OnBoarding.Login
+    }
+
+    suspend fun setUserStatus(isFirstTime: Boolean): Boolean {
+        prefs.edit { it[isNewUserKey] = isFirstTime }
+        return true
     }
 }
 
