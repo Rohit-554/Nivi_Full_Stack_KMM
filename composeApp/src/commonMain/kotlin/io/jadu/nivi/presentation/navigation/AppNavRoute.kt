@@ -23,7 +23,8 @@ import kotlinx.serialization.modules.polymorphic
 
 @Composable
 fun AppNavRoute(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    startDestination: AppRoute,
 ) {
     val rootBackStack = rememberNavBackStack(
         configuration = SavedStateConfiguration {
@@ -34,7 +35,8 @@ fun AppNavRoute(
                 }
             }
         },
-        AppRoute.OnBoarding
+        // If user is logged in, start at Home, otherwise start at OnBoarding
+         if (startDestination == AppRoute.Home) AppRoute.Home else AppRoute.OnBoarding
     )
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -55,6 +57,7 @@ fun AppNavRoute(
             entryProvider = entryProvider {
                 entry<AppRoute.OnBoarding> {
                     OnBoardingNavigation(
+                        startDestination = startDestination,
                         onLogin = {
                             rootBackStack.remove(AppRoute.OnBoarding)
                             rootBackStack.add(AppRoute.Home)

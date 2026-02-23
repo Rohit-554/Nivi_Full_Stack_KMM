@@ -37,7 +37,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import io.jadu.nivi.presentation.components.ButtonUI
 import io.jadu.nivi.presentation.components.GlassContainer
 import io.jadu.nivi.presentation.components.RiveAnimationComponent
@@ -51,12 +50,13 @@ import io.jadu.nivi.presentation.theme.h1TextStyle
 import io.jadu.nivi.presentation.utils.VSpacer
 import io.jadu.nivi.presentation.utils.extensions.bounceClickable
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun OnboardingScreen(
     onFinishOnboarding: () -> Unit,
-    viewModel: OnboardingViewModel = viewModel()
+    viewModel: OnboardingViewModel = koinInject()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -64,6 +64,7 @@ fun OnboardingScreen(
     val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(pagerState) {
+        viewModel.setUserStatus(false)
         snapshotFlow { pagerState.currentPage }.collect { page ->
             viewModel.updateCurrentPage(page)
         }

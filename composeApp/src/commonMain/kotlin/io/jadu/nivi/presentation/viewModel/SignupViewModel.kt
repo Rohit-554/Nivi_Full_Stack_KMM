@@ -2,6 +2,7 @@ package io.jadu.nivi.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.jadu.nivi.domain.manager.AuthManager
 import io.jadu.nivi.domain.useCase.SignupUseCase
 import io.jadu.nivi.models.AuthResponse
 import io.jadu.nivi.models.NetworkResult
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class SignupViewModel(
     private val signupUseCase: SignupUseCase,
+    private val authManager: AuthManager
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<SignupUiState> = MutableStateFlow(SignupUiState())
@@ -98,6 +100,10 @@ class SignupViewModel(
             when (val result = signupUseCase(sanitizedRequest)) {
                 is NetworkResult.Success -> {
                     _uiState.update { it.copy(isLoading = false) }
+                    // Save auth data for persistent login
+                    result.data?.let { authResponse ->
+                        authManager.saveAuthData(authResponse.token, authResponse.userName)
+                    }
                     _event.emit(SignupEvent.Success(result.data))
                 }
                 is NetworkResult.Error -> {

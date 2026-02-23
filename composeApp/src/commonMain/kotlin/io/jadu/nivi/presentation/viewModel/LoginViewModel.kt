@@ -2,6 +2,7 @@ package io.jadu.nivi.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.jadu.nivi.domain.manager.AuthManager
 import io.jadu.nivi.domain.useCase.LoginUseCase
 import io.jadu.nivi.models.AuthResponse
 import io.jadu.nivi.models.LoginRequest
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val loginUseCase: LoginUseCase,
+    private val authManager: AuthManager
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<LoginUiState> = MutableStateFlow(LoginUiState())
@@ -61,21 +63,25 @@ class LoginViewModel(
 
         _uiState.update { it.copy(isLoading = true) }
 
-        viewModelScope.launch {
-            when (val result = loginUseCase(sanitizedRequest)) {
-                is NetworkResult.Success -> {
-                    _uiState.update { it.copy(isLoading = false) }
-                    _event.emit(LoginEvent.Success(result.data))
+    viewModelScope.launch {
+        when (val result = loginUseCase(sanitizedRequest)) {
+            is NetworkResult.Success -> {
+                _uiState.update { it.copy(isLoading = false) }
+                // Save auth data for persistent login
+                result.data?.let { authResponse ->
+                    authManager.saveAuthData(authResponse.token, authResponse.userName)
                 }
-                is NetworkResult.Error -> {
-                    _uiState.update { it.copy(isLoading = false) }
-                    _event.emit(LoginEvent.Error(result.message ?: "Login failed"))
-                }
-                is NetworkResult.Loading -> {
-                    _uiState.update { it.copy(isLoading = true) }
-                }
+                _event.emit(LoginEvent.Success(result.data))
+            }
+            is NetworkResult.Error -> {
+                _uiState.update { it.copy(isLoading = false) }
+                _event.emit(LoginEvent.Error(result.message ?: "Login failed"))
+            }
+            is NetworkResult.Loading -> {
+                _uiState.update { it.copy(isLoading = true) }
             }
         }
+    }
     }
 
     private fun validateCredentials(request: LoginRequest): String? {
