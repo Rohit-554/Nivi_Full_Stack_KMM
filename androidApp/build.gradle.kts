@@ -4,11 +4,24 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
-
+val isAndroidProd = gradle.startParameter.taskRequests.toString().contains("Prod", ignoreCase = true)
+project.ext.set("APP_ENV", if (isAndroidProd) "prod" else "qa")
 
 android {
     namespace = "io.jadu.nivi"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+    flavorDimensions += "environment"
+
+    productFlavors {
+        create("qa") {
+            dimension = "environment"
+            applicationIdSuffix = ".qa"
+        }
+        create("prod") {
+            dimension = "environment"
+        }
+    }
 
     defaultConfig {
         applicationId = "io.jadu.nivi"

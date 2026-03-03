@@ -1,6 +1,6 @@
 package io.jadu.nivi.data.remote
 
-import io.jadu.nivi.utils.Constants
+import io.jadu.nivi.shared.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -33,7 +33,7 @@ object KtorClient {
         }
 
         defaultRequest {
-            url(Constants.BASE_URL)
+            url(BuildConfig.BASE_URL)
             contentType(ContentType.Application.Json)
         }
     }
