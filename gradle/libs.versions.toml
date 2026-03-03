@@ -36,6 +36,7 @@ coil3 = "3.2.0"
 compottie = "2.0.2"
 datastore = "1.2.0"
 multiplatform-nav3-ui = "1.0.0-alpha06"
+gmazzo-buildconfig = "6.0.7"
 
 [libraries]
 androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3Version" }
@@ -111,3 +112,4 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+gmazzo-buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "gmazzo-buildconfig" }
